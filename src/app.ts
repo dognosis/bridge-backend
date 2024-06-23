@@ -1,7 +1,7 @@
 import express from "express";
 import handleError from "./middleware/error.middleware";
 import { authenticate } from "./middleware/auth.middleware";
-import prisma from "./database";
+import usersRouter from "./users/users.controller";
 
 const app = express();
 const PORT = 3000;
@@ -18,12 +18,7 @@ app.get("/protected", authenticate, (req, res) => {
   return;
 });
 
-app.get("/users", async (req, res) => {
-  const users = await prisma.user.findMany();
-  res.json(users);
-
-  return;
-});
+app.use("/users", usersRouter);
 
 app.use(handleError);
 
