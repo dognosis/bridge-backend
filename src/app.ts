@@ -1,6 +1,7 @@
 import express from "express";
 import handleError from "./middleware/error.middleware";
 import { authenticate } from "./middleware/auth.middleware";
+import prisma from "./database";
 
 const app = express();
 const PORT = 3000;
@@ -13,6 +14,13 @@ app.get("/", (req, res) => {
 
 app.get("/protected", authenticate, (req, res) => {
   res.json({ message: "Proctected!" });
+
+  return;
+});
+
+app.get("/users", async (req, res) => {
+  const users = await prisma.user.findMany();
+  res.json(users);
 
   return;
 });
