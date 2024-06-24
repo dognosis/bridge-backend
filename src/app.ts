@@ -4,7 +4,6 @@ import { authenticate } from "./middleware/auth.middleware";
 import usersRouter from "./users/users.controller";
 
 const app = express();
-const PORT = 3000;
 
 app.get("/", (req, res) => {
   res.json({ message: "Hello, World!" });
@@ -22,6 +21,4 @@ app.use("/users", usersRouter);
 
 app.use(handleError);
 
-app.listen(PORT, () => {
-  return console.log(`Express is listening at https://localhost:${PORT}`);
-});
+export default app;
