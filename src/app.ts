@@ -7,6 +7,7 @@ import usersRouter from "./users/users.controller";
 import dogsRouter from "./dogs/dogs.controller";
 import sessionsRouter from "./sessions/sessions.controller";
 import runsRouter from "./runs/runs.controller";
+import sniffsRouter from "./sniffs/sniffs.controller";
 import bodyParser from "body-parser";
 
 const app = express();
@@ -29,6 +30,7 @@ app.use("/users", usersRouter);
 app.use("/dogs", dogsRouter);
 app.use("/sessions", sessionsRouter);
 app.use("/runs", runsRouter);
+app.use("/sniffs", sniffsRouter);
 
 app.use(handleError);
 
