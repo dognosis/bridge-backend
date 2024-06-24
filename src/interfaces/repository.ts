@@ -1,8 +1,8 @@
 interface Repository<T> {
-  create?(): Promise<T>;
+  create?(data: any): Promise<T>;
   get?(id: string): Promise<T>;
   getAll?(): Promise<T[]>;
-  update?(): Promise<T>;
+  update?(id: string, data: any): Promise<T>;
   delete?(id: string): Promise<T>;
 }
 
