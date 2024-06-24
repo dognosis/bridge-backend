@@ -6,6 +6,7 @@ import { authenticate } from "./middleware/auth.middleware";
 import usersRouter from "./users/users.controller";
 import dogsRouter from "./dogs/dogs.controller";
 import sessionsRouter from "./sessions/sessions.controller";
+import runsRouter from "./runs/runs.controller";
 import bodyParser from "body-parser";
 
 const app = express();
@@ -27,6 +28,7 @@ app.get("/protected", authenticate, (req, res) => {
 app.use("/users", usersRouter);
 app.use("/dogs", dogsRouter);
 app.use("/sessions", sessionsRouter);
+app.use("/runs", runsRouter);
 
 app.use(handleError);
 
