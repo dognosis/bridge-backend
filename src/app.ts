@@ -3,6 +3,7 @@ import cors from "cors";
 import handleError from "./middleware/error.middleware";
 import { authenticate } from "./middleware/auth.middleware";
 import usersRouter from "./users/users.controller";
+import dogsRouter from "./dogs/dogs.controller";
 
 const app = express();
 app.use(cors({ origin: true, credentials: true }));
@@ -20,6 +21,7 @@ app.get("/protected", authenticate, (req, res) => {
 });
 
 app.use("/users", usersRouter);
+app.use("/dogs", dogsRouter);
 
 app.use(handleError);
 
