@@ -13,6 +13,16 @@ class RunsRepository implements Repository<Run> {
     return run;
   }
 
+  async get(id: string) {
+    const run = await this.prisma.run.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    return run;
+  }
+
   async update(id: string, data: UpdateRunDbDto) {
     const run = await this.prisma.run.update({
       where: {
