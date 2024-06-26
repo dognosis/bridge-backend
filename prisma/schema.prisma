@@ -19,13 +19,13 @@ model User {
 }
 
 model Dog {
-  id             String   @id @default(uuid())
+  id             String    @id @default(uuid())
   name           String
   breed          String
   sex            String
   training_start DateTime
-  birthday       DateTime
-  last_heat      DateTime
+  birthday       DateTime?
+  last_heat      DateTime?
 
   sessions Session[]
 }
