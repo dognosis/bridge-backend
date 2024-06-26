@@ -20,7 +20,7 @@ model User {
 
 model Dog {
   id             String    @id @default(uuid())
-  name           String
+  name           String    @unique
   breed          String
   sex            String
   training_start DateTime
