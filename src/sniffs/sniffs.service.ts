@@ -1,5 +1,6 @@
 import HttpExpception from "../exceptions/HttpException";
 import RunsRepository from "../runs/runs.repository";
+import { emit } from "../socket";
 import { CreateSniffDto } from "./sniffs.dto";
 import SniffsRepository from "./sniffs.repository";
 
@@ -27,6 +28,8 @@ class SniffsService {
     );
 
     const sniff = await this.sniffsRepository.create({ result, ...data });
+
+    emit("sniff", sniff);
 
     return sniff;
   }

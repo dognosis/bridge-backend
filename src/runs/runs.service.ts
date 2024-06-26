@@ -1,3 +1,4 @@
+import { emit } from "../socket";
 import { CreateRunDto, EndRunDto, UpdateRunDto } from "./runs.dto";
 import RunsRepository from "./runs.repository";
 
@@ -6,6 +7,8 @@ class RunsService {
 
   async startNewRun(data: CreateRunDto) {
     const run = await this.runsRepository.create(data);
+
+    emit("run_start", run);
 
     return run;
   }
@@ -18,6 +21,8 @@ class RunsService {
 
   async endRun(id: string, data: EndRunDto) {
     const run = await this.runsRepository.update(id, data);
+
+    emit("run_end", run);
 
     return run;
   }

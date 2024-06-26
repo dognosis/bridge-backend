@@ -1,3 +1,4 @@
+import { emit } from "../socket";
 import { CreateSessionDto, EndSessionDto } from "./sessions.dto";
 import SessionsRepository from "./sessions.repository";
 
@@ -10,11 +11,15 @@ class SessionsService {
       ...data,
     });
 
+    emit("session_start", session);
+
     return session;
   }
 
   async endSession(id: string, data: EndSessionDto) {
     const session = await this.sessionsRepository.update(id, data);
+
+    emit("session_end", session);
 
     return session;
   }

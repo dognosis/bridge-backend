@@ -10,6 +10,8 @@ import sessionsRouter from "./sessions/sessions.controller";
 import runsRouter from "./runs/runs.controller";
 import sniffsRouter from "./sniffs/sniffs.controller";
 import bodyParser from "body-parser";
+import { createServer } from "http";
+import socket from "./socket";
 
 const app = express();
 app.use(bodyParser.json());
@@ -33,6 +35,11 @@ app.use("/sessions", sessionsRouter);
 app.use("/runs", runsRouter);
 app.use("/sniffs", sniffsRouter);
 
+app.locals.activeSessionId = "";
+
 app.use(handleError);
 
-export default app;
+const server = createServer(app);
+socket.connect(server);
+
+export default server;
