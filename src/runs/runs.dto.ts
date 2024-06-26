@@ -9,7 +9,7 @@ export class CreateRunDto {
   positive_stations: string;
 
   @IsNotEmpty()
-  sample_battery: string;
+  sample_battery: CreateSampleBattery[];
 
   @IsDateString()
   start_time: string;
@@ -22,7 +22,7 @@ export class UpdateRunDbDto {
 
   @IsOptional()
   @IsNotEmpty()
-  sample_battery?: string;
+  sample_battery?: CreateSampleBattery[];
 
   @IsOptional()
   @IsDateString()
@@ -36,10 +36,17 @@ export class UpdateRunDto {
 
   @IsOptional()
   @IsNotEmpty()
-  sample_battery?: string;
+  sample_battery?: CreateSampleBattery[];
 }
 
 export class EndRunDto {
   @IsDateString()
   end_time: string;
+}
+
+export class CreateSampleBattery {
+  @IsNotEmpty()
+  station: string;
+  @IsNotEmpty()
+  sample_ehr_uid: string;
 }

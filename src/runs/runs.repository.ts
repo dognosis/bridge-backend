@@ -6,8 +6,15 @@ class RunsRepository implements Repository<Run> {
   constructor(private prisma: PrismaClient) {}
 
   async create(data: CreateRunDto) {
+    const dbData = {
+      ...data,
+      sample_battery: {
+        create: data["sample_battery"],
+      },
+    };
+
     const run = await this.prisma.run.create({
-      data: data,
+      data: dbData,
     });
 
     return run;
@@ -24,11 +31,18 @@ class RunsRepository implements Repository<Run> {
   }
 
   async update(id: string, data: UpdateRunDbDto) {
+    const dbData = {
+      ...data,
+      sample_battery: {
+        create: data["sample_battery"],
+      },
+    };
+
     const run = await this.prisma.run.update({
       where: {
         id: id,
       },
-      data: data,
+      data: dbData,
     });
 
     return run;
