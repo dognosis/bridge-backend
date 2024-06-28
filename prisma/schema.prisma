@@ -55,7 +55,7 @@ model Run {
 
   sample_battery SampleBattery[]
   sniffs         Sniff[]
-  session        Session         @relation(fields: [session_id], references: [id])
+  session        Session         @relation(fields: [session_id], references: [id], onDelete: Cascade)
 }
 
 model Sniff {
@@ -66,7 +66,7 @@ model Sniff {
   result                 String
   time                   DateTime
 
-  run Run @relation(fields: [run_id], references: [id])
+  run Run @relation(fields: [run_id], references: [id], onDelete: Cascade)
 }
 
 model SampleBattery {
@@ -75,7 +75,7 @@ model SampleBattery {
   station        String
   sample_ehr_uid String
 
-  run Run @relation(fields: [run_id], references: [id])
+  run Run @relation(fields: [run_id], references: [id], onDelete: Cascade)
 
   @@unique([run_id, station])
 }
