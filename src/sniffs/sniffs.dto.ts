@@ -25,3 +25,13 @@ export class CreateSniffWithResultDto extends CreateSniffDto {
   @IsIn(["true_positive", "false_positive", "false_negative", "true_negative"])
   result: string;
 }
+
+export class UpdateSniffDto {
+  @IsBoolean()
+  is_positive_indication: boolean;
+}
+
+export class UpdateSniffWithResultDto extends UpdateSniffDto {
+  @IsIn(["true_positive", "false_positive", "false_negative", "true_negative"])
+  result: string;
+}

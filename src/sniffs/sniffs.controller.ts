@@ -5,7 +5,7 @@ import prisma from "../database";
 import SniffsService from "./sniffs.service";
 import RunsRepository from "../runs/runs.repository";
 import validateData from "../middleware/validate.middleware";
-import { CreateSniffDto } from "./sniffs.dto";
+import { CreateSniffDto, UpdateSniffDto } from "./sniffs.dto";
 
 const router = Router();
 router.use(authenticate);
@@ -20,6 +20,23 @@ router.post("/", validateData(CreateSniffDto), async (req, res) => {
   const sniff = await sniffsService.logSniff(data);
 
   res.status(201).json(sniff);
+  return;
+});
+
+router.patch("/:sniffId", validateData(UpdateSniffDto), async (req, res) => {
+  const { sniffId } = req.params;
+  const data = req.body as UpdateSniffDto;
+
+  const sniff = await sniffsService.updateSniff(sniffId, data);
+  res.status(200).json(sniff);
+  return;
+});
+
+router.delete("/:sniffId", async (req, res) => {
+  const { sniffId } = req.params;
+
+  const sniff = await sniffsService.deleteSniff(sniffId);
+  res.status(200).json(sniff);
   return;
 });
 
