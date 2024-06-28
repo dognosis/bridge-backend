@@ -12,10 +12,12 @@ import sniffsRouter from "./sniffs/sniffs.controller";
 import bodyParser from "body-parser";
 import { createServer } from "http";
 import socket from "./socket";
+import loggerMiddleware from "./middleware/logger.middleware";
 
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({ origin: true, credentials: true }));
+app.use(loggerMiddleware);
 
 app.get("/", (req, res) => {
   res.json({ message: "Hello, World!" });
