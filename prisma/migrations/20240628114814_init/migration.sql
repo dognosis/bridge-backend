@@ -27,6 +27,7 @@ CREATE TABLE "Session" (
     "last_meal" INTEGER NOT NULL,
     "start_time" DATETIME NOT NULL,
     "end_time" DATETIME,
+    "mode" TEXT NOT NULL DEFAULT 'training',
     CONSTRAINT "Session_trainer_id_fkey" FOREIGN KEY ("trainer_id") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "Session_dog_id_fkey" FOREIGN KEY ("dog_id") REFERENCES "Dog" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
@@ -38,7 +39,7 @@ CREATE TABLE "Run" (
     "positive_stations" TEXT NOT NULL,
     "start_time" DATETIME NOT NULL,
     "end_time" DATETIME,
-    CONSTRAINT "Run_session_id_fkey" FOREIGN KEY ("session_id") REFERENCES "Session" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "Run_session_id_fkey" FOREIGN KEY ("session_id") REFERENCES "Session" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -49,7 +50,7 @@ CREATE TABLE "Sniff" (
     "is_positive_indication" BOOLEAN NOT NULL,
     "result" TEXT NOT NULL,
     "time" DATETIME NOT NULL,
-    CONSTRAINT "Sniff_run_id_fkey" FOREIGN KEY ("run_id") REFERENCES "Run" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "Sniff_run_id_fkey" FOREIGN KEY ("run_id") REFERENCES "Run" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -58,7 +59,7 @@ CREATE TABLE "SampleBattery" (
     "run_id" TEXT NOT NULL,
     "station" TEXT NOT NULL,
     "sample_ehr_uid" TEXT NOT NULL,
-    CONSTRAINT "SampleBattery_run_id_fkey" FOREIGN KEY ("run_id") REFERENCES "Run" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "SampleBattery_run_id_fkey" FOREIGN KEY ("run_id") REFERENCES "Run" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateIndex
