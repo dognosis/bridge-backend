@@ -47,6 +47,16 @@ class RunsRepository implements Repository<Run> {
 
     return run;
   }
+
+  async delete(id: string) {
+    const run = await this.prisma.run.delete({
+      where: {
+        id: id,
+      },
+    });
+
+    return run;
+  }
 }
 
 export default RunsRepository;

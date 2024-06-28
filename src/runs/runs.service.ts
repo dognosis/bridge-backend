@@ -26,6 +26,12 @@ class RunsService {
 
     return run;
   }
+
+  async discardRun(id: string) {
+    const run = await this.runsRepository.delete(id);
+
+    return run;
+  }
 }
 
 export default RunsService;

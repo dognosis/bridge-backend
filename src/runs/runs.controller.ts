@@ -29,6 +29,14 @@ router.patch("/:runId", validateData(UpdateRunDto), async (req, res) => {
   return;
 });
 
+router.delete("/:runId", async (req, res) => {
+  const { runId } = req.params;
+
+  const run = await runsService.discardRun(runId);
+  res.status(200).json(run);
+  return;
+});
+
 router.patch("/:runId/end", validateData(EndRunDto), async (req, res) => {
   const { runId } = req.params;
   const data = req.body as EndRunDto;
