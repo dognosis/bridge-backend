@@ -40,6 +40,7 @@ model Session {
   last_meal       Int
   start_time      DateTime
   end_time        DateTime?
+  mode            String    @default("training")
 
   trainer User  @relation(fields: [trainer_id], references: [id])
   dog     Dog   @relation(fields: [dog_id], references: [id])
