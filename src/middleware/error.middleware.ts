@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import * as Sentry from "@sentry/node";
 import HttpExpception from "../exceptions/HttpException";
 
 const handleError = (
@@ -14,6 +15,8 @@ const handleError = (
     res.status(status).json({ status, message });
     return;
   }
+
+  Sentry.captureException(error);
 
   console.error(
     "---Unexpected-Error---",
