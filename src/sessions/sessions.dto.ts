@@ -30,10 +30,14 @@ export class CreateSessionDto {
   start_time: string;
 }
 
-export class CreateSessionWithTrainerIdDto extends CreateSessionDto {
+export class CreateSessionDbDto extends CreateSessionDto {
   @IsNotEmpty()
   @IsUUID()
   trainer_id: string;
+
+  @IsNotEmpty()
+  @IsUUID()
+  sample_set_id: string;
 }
 
 export class UpdateSessionDbDto {

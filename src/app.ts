@@ -10,6 +10,7 @@ import dogsRouter from "./dogs/dogs.controller";
 import sessionsRouter from "./sessions/sessions.controller";
 import runsRouter from "./runs/runs.controller";
 import sniffsRouter from "./sniffs/sniffs.controller";
+import sampleSetRouter from "./sample-set/sample-set.controller";
 import bodyParser from "body-parser";
 import { createServer } from "http";
 import socket from "./socket";
@@ -34,6 +35,7 @@ app.get("/protected", authenticate, (req, res) => {
 
 app.use("/users", usersRouter);
 app.use("/dogs", dogsRouter);
+app.use("/sample-set", sampleSetRouter);
 app.use("/sessions", sessionsRouter);
 app.use("/runs", runsRouter);
 app.use("/sniffs", sniffsRouter);

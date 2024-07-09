@@ -5,12 +5,20 @@ import { authenticate } from "../middleware/auth.middleware";
 import SessionsRepository from "./sessions.repository";
 import prisma from "../database";
 import SessionsService from "./sessions.service";
+import SampleSetService from "../sample-set/sample-set.service";
+import SampleSetRepository from "../sample-set/sample-set.repository";
 
 const router = Router();
 router.use(authenticate);
 
 const sessionsRepository = new SessionsRepository(prisma);
-const sessionsService = new SessionsService(sessionsRepository);
+
+const sampleSetRepository = new SampleSetRepository(prisma);
+const sampleSetService = new SampleSetService(sampleSetRepository);
+const sessionsService = new SessionsService(
+  sessionsRepository,
+  sampleSetService
+);
 
 router.post("/", validateData(CreateSessionDto), async (req, res) => {
   const trainerId = req.user?.id as string;

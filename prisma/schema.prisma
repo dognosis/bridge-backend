@@ -34,6 +34,7 @@ model Session {
   id              String    @id @default(uuid())
   trainer_id      String
   dog_id          String
+  sample_set_id   String
   eeg_file_path   String?
   video_file_path String?
   notes           String?
@@ -42,9 +43,19 @@ model Session {
   end_time        DateTime?
   mode            String    @default("training")
 
-  trainer User  @relation(fields: [trainer_id], references: [id])
-  dog     Dog   @relation(fields: [dog_id], references: [id])
-  runs    Run[]
+  trainer    User      @relation(fields: [trainer_id], references: [id])
+  dog        Dog       @relation(fields: [dog_id], references: [id])
+  sample_set SampleSet @relation(fields: [sample_set_id], references: [id])
+  runs       Run[]
+}
+
+model SampleSet {
+  id              String   @id @default(uuid())
+  date            String   @unique
+  sample_ehr_uids String
+  date_time       DateTime
+
+  sessions Session[]
 }
 
 model Run {

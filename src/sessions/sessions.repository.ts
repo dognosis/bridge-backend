@@ -1,14 +1,11 @@
 import { PrismaClient, Session } from "@prisma/client";
 import { Repository } from "../interfaces/repository";
-import {
-  CreateSessionWithTrainerIdDto,
-  UpdateSessionDbDto,
-} from "./sessions.dto";
+import { CreateSessionDbDto, UpdateSessionDbDto } from "./sessions.dto";
 
 class SessionsRepository implements Repository<Session> {
   constructor(private prisma: PrismaClient) {}
 
-  async create(data: CreateSessionWithTrainerIdDto) {
+  async create(data: CreateSessionDbDto) {
     const session = await this.prisma.session.create({
       data: data,
     });
