@@ -34,4 +34,12 @@ router.patch(
   }
 );
 
+router.get("/:sessionId/run-count", async (req, res) => {
+  const { sessionId } = req.params;
+
+  const runCount = await sessionsService.getRunCount(sessionId);
+  res.status(200).json({ runCount });
+  return;
+});
+
 export default router;

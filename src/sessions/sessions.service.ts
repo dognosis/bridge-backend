@@ -23,6 +23,12 @@ class SessionsService {
 
     return session;
   }
+
+  async getRunCount(id: string) {
+    const runCount = await this.sessionsRepository.getRunCount(id);
+
+    return runCount;
+  }
 }
 
 export default SessionsService;
