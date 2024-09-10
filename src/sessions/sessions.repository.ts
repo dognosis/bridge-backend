@@ -26,6 +26,21 @@ class SessionsRepository implements Repository<Session> {
 
     return session;
   }
+
+  async getRunCount(id: string): Promise<Number> {
+    const runsCount = await this.prisma.session.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        _count: {
+          select: { runs: true },
+        },
+      },
+    });
+
+    return runsCount?._count.runs ?? 0;
+  }
 }
 
 export default SessionsRepository;
