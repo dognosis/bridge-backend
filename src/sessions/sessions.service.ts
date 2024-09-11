@@ -6,14 +6,15 @@ class SessionsService {
   constructor(private sessionsRepository: SessionsRepository) {}
 
   async startNewSession(trainer_id: string, data: CreateSessionDto) {
+    const { ir_mode, ...dbData } = data;
     const session = await this.sessionsRepository.create({
       trainer_id,
-      ...data,
+      ...dbData,
     });
 
-    emit("session_start", session);
+    emit("session_start", { ...session, ir_mode });
 
-    return session;
+    return { ...session, ir_mode };
   }
 
   async endSession(id: string, data: EndSessionDto) {

@@ -1,4 +1,5 @@
 import {
+  IsBoolean,
   IsDateString,
   IsNotEmpty,
   IsNumber,
@@ -28,12 +29,37 @@ export class CreateSessionDto {
 
   @IsDateString()
   start_time: string;
+
+  @IsBoolean()
+  ir_mode: boolean;
 }
 
-export class CreateSessionWithTrainerIdDto extends CreateSessionDto {
+export class CreateSessionWithTrainerIdDto {
   @IsNotEmpty()
   @IsUUID()
   trainer_id: string;
+
+  @IsNotEmpty()
+  @IsUUID()
+  dog_id: string;
+
+  @IsOptional()
+  @IsNotEmpty()
+  eeg_file_path?: string;
+
+  @IsOptional()
+  @IsNotEmpty()
+  video_file_path?: string;
+
+  @IsOptional()
+  @IsNotEmpty()
+  notes?: string;
+
+  @IsNumber()
+  last_meal: number;
+
+  @IsDateString()
+  start_time: string;
 }
 
 export class UpdateSessionDbDto {
