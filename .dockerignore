@@ -1,0 +1,7 @@
+.git
+.env
+.env.test.local
+*Dockerfile*
+*docker-compose*
+node_modules
+dist
